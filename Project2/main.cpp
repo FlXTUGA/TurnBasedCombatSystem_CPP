@@ -4,46 +4,7 @@
 #include <chrono>
 #include <windows.h>
 
-class Char {
-
-private:
-	int const vidaMax;
-	int  vidaAtual;
-
-	int  const dano;
-	bool estaDefendendo;
-	int valorDefesa;
-
-	int bonusDano;
-
-public:
-	Char(int vida, int dano, int defesa) : vidaMax(vida), dano(dano), valorDefesa(defesa), estaDefendendo(false), vidaAtual(vidaMax), bonusDano(0) {}
-
-	void fimTurno() {
-		estaDefendendo = false;
-	}
-	void defender() {
-		estaDefendendo = true;
-	}
-
-	void ataque(Char& alvo) {
-		alvo.receberDano(getDano());
-	}
-	void receberDano(int valor) {
-
-		if (estaDefendendo) {
-			valor -= valorDefesa;
-		}
-		if (valor < 0) { valor = 0; }
-		vidaAtual -= valor;
-		if (vidaAtual < 0) { vidaAtual = 0; }
-	}
-
-	int getVida() const { return vidaAtual; }
-	int getDano() const { return dano + bonusDano; }
-	int getVidaMax() const { return vidaMax; }
-	int getDefesa() const { return valorDefesa; }
-};
+#include "Char.h"
 
 void escreverLento(const std::string& texto, int delayMs = 45) {
 	for (char c : texto) {
