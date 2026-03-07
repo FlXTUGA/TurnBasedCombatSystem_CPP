@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Char.h"
 
 //Mostra o menu de combate e devolve a escolha do jogador
 char mostrarMenuEReceberEscolha();
@@ -11,3 +12,7 @@ void mudarCor(int cor);
 void escreverLento(const std::string& texto, int delayMs = 45);
 
 std::string escolherNome();
+
+Raca escolherRaca();
+
+void linha(int tamanho, char simbolo = '=');
