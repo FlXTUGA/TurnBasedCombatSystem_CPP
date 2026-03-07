@@ -1,91 +1,46 @@
 #include <iostream>
 #include <string>
+#include <string>
 #include <thread>
 #include <chrono>
-#include <windows.h>
 
 #include "Char.h"
-
-void escreverLento(const std::string& texto, int delayMs = 45) {
-	for (char c : texto) {
-		std::cout << c << std::flush;
-		std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
-	}
-}
-
-void mudarCor(int cor) {
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), cor);
-}
+#include "Combat.h"
+#include "Menu.h"
 
 int main() {
-	std::cout << std::string(50, '\n');
-	char escolha;
-	std::string nome;
-	Char jogador(100, 60, 15),
+
+	Char jogador(100, 20, 15),
 		 inimigo(60, 20, 0);
-	//Calcular dano de defesa
-	int danoOrigina = inimigo.getDano();
-	int danoFinal = inimigo.getDano() - jogador.getDefesa();
-	int reduzido = danoOrigina - danoFinal;
 
-	escreverLento("Inisira o seu Nome: ");
-	std::this_thread::sleep_for(std::chrono::milliseconds(900)); //delay de texto de cima
 
-	std::getline(std::cin, nome); // Escreveres o Teu nome
 
-	while (jogador.getVida() > 0 && inimigo.getVida() > 0) {
-		escreverLento(
-			"\nJogador: " + nome + "   HP: " + std::to_string(jogador.getVida()) + "/" + std::to_string(jogador.getVidaMax()) + "\n" +
-			"Inimigo: Rogerio   HP: " + std::to_string(inimigo.getVida()) + "/" + std::to_string(inimigo.getVidaMax()) + "\n" +
-			"Escolhe UMA opcao\n1) Atacar \n2) Defender\n3) Esperar\n> "
-		);
-		std::cin >> escolha;
-		switch (escolha) {
-		case'1': {
-			jogador.ataque(inimigo);
-			mudarCor(9);//Azul
-			escreverLento("O jogador atacou!\n");
-			std::this_thread::sleep_for(std::chrono::milliseconds(800));
-			break;
-		}
-		case'2': {
-			jogador.defender();
-			mudarCor(9);//Azul
-			escreverLento(nome+" tu estas em modo Defesa!\n");
-			break;
-		}
-		case'3': { // Não faz nada só manda mensagem
-			mudarCor(9);//Azul
-			escreverLento(nome + " tu escolheste um caminho diferente\n");
-			std::this_thread::sleep_for(std::chrono::milliseconds(800));
-			break;
-		}
-		default: break;
-		}
+	std::string nome = escolherNome();
 
-		if (escolha == '3') {
-			mudarCor(12);//vermelho
-			escreverLento("O inimigo nao pensa o mesmo\n");
-		}
-		inimigo.ataque(jogador); //futuramente adicionar um if de se o jogador esperou então o inimigo diz uma frase contraria ao que o jogador escolheu a cima
-		mudarCor(12);//vermelho
-		escreverLento("O inimigo atacou!\n");
-		if (escolha == '2') {
-			mudarCor(9);//Azul
-			escreverLento("(Defesa) reduziu " + std::to_string(reduzido) + "\n");
-		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(800));
-		
-		jogador.fimTurno();
+	mudarCor(14);
+	escreverLento("\n\n\n\nA entrada da dungeon fecha-se atras de ti...\n");
+	std::this_thread::sleep_for(std::chrono::milliseconds(900));
 
-		if (jogador.getVida() == 0) {
-			mudarCor(12);//vermelho
-			escreverLento(nome + "... a escuridao da dungeon consumiu-te.\n");
-		}
-		if (inimigo.getVida() == 0) {
-			mudarCor(9);//Azul
-			escreverLento("O inimigo cai. \nO silencio volta... mas algo ainda se move na escuridao.\n");
-		}
-		mudarCor(7);
-	}
+	escreverLento("O ar e frio... e o silencio pesa nos corredores de pedra.\n");
+	std::this_thread::sleep_for(std::chrono::milliseconds(900));
+
+	escreverLento("Das alguns passos na escuridao.\n");
+	std::this_thread::sleep_for(std::chrono::milliseconds(900));
+
+	escreverLento("De repente...\n");
+	std::this_thread::sleep_for(std::chrono::milliseconds(1200));
+
+	escreverLento("Algo move-se nas sombras.\n");
+	std::this_thread::sleep_for(std::chrono::milliseconds(900));
+
+	mudarCor(12);
+	escreverLento("Um inimigo aparece no teu caminho.\n");
+	std::this_thread::sleep_for(std::chrono::milliseconds(900));
+
+	mudarCor(7);
+	escreverLento("Prepara-te para lutar " + nome + "\n");
+
+	iniciarCombate(jogador, inimigo, nome);
+	
+	return 0;
 }

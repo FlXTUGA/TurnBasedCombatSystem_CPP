@@ -1,5 +1,7 @@
 #include "Char.h"
 
+
+
 Char::Char(int vida, int dano, int defesa) : vidaMax(vida), dano(dano), valorDefesa(defesa), estaDefendendo(false), vidaAtual(vidaMax), bonusDano(0) {}
 
 void Char::fimTurno() {
