@@ -1,38 +1,104 @@
-A turn-based combat prototype built in C++ to practice object-oriented programming, combat system design, and console-based UI feedback.
+**Turn-Based Combat System (C++)**
 
-This project simulates a retro-style RPG battle system with:
+A simple turn-based combat system written in C++ designed as a learning project for gameplay programming and object-oriented design.
 
-Player and enemy characters
+The goal of this project is to explore how classic RPG combat systems work internally, including character stats, defensive mechanics, and turn resolution.
 
-Attack and defense mechanics
+This project is part of my journey to become a gameplay programmer.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Features**
 
-Damage reduction logic
+- Turn-based combat loop
 
-Turn resolution flow
+- Player actions:
+  - Attack
+  - Defend
+  - Wait
 
-Typewriter-style text animation for retro game feel
---------------------------------------------------------------------------------------------------------------------------------------------------
-Features
+- Character stats system:
+  - Health
+  - Max Health
+  - Damage
+  - Defense
 
-Encapsulated Char class
+- Defense mechanic that reduces incoming damage
+  - Console UI with:
+  - Typewriter text effect
+  - Colored output
 
-Attack system (ataque)
+- Modular code structure using multiple source files
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Project Structure
 
-Damage handling (receberDano)
+```
+Project2/
+│
+├── main.cpp
+│   Entry point of the program
+│
+├── Char.h / Char.cpp
+│   Character class and combat logic
+│
+├── Combat.h / Combat.cpp
+│   Handles the combat loop and turn system
+│
+├── Menu.h / Menu.cpp
+│   Console UI utilities (menu, colors, typewriter text)
+```
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Gameplay Example**
+Player: TIGAS  HP: 100/100
+Enemy: Rogerio HP: 60/60
 
-Defensive state system
+Choose an action:
+1) Attack
+2) Defend
+3) Wait
+>
 
-Turn reset logic (fimTurno)
+Example mechanics:
+- Attack deals damage to the enemy
+- Defend reduces incoming damage
+- Wait skips the turn
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**How To Run**
 
-Console UI with animated text output
+Requirements:
+- C++ compiler (g++, clang, or MSVC)
+- Windows terminal (color support currently uses Windows API)
 
-HP tracking and clamping
---------------------------------------------------------------------------------------------------------------------------------------------------
-C++
+Compile example:
+g++ main.cpp Combat.cpp Menu.cpp Char.cpp -o combat
 
-Object-Oriented Programming (OOP)
+Run:
+./combat
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Learning Goals**
+This project focuses on practicing:
+- Object-Oriented Programming
+- Class design
+- Encapsulation
+- Turn-based gameplay logic
+- Modular C++ project structure
+- Basic terminal UI
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Future Improvements**
+- Planned features:
+- Multiple enemies
+- Status effects
+- Skills and abilities
+- Inventory system
+- Random encounters
+- Critical hits
+- Experience and leveling
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Author**
+TIGAS
 
-<thread> and <chrono> for animation timing
+Computer Science student and aspiring Gameplay Programmer.
 
-Console-based user interaction
---------------------------------------------------------------------------------------------------------------------------------------------------
+Currently building a C++ portfolio with small gameplay systems and mechanics.
+
+License
+
+This project is open source and available under the MIT License.
