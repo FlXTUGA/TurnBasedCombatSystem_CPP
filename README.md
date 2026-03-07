@@ -28,10 +28,14 @@ This project is part of my journey to become a gameplay programmer.
 
 - Modular code structure using multiple source files
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Project Structure**
+# Project Structure
+
+```
 Project2/
 │
-├── main.cpp        # Entry point of the program
+├── main.cpp
+│   Entry point of the program
+│
 ├── Char.h / Char.cpp
 │   Character class and combat logic
 │
@@ -40,6 +44,7 @@ Project2/
 │
 ├── Menu.h / Menu.cpp
 │   Console UI utilities (menu, colors, typewriter text)
+```
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Gameplay Example**
 Player: TIGAS  HP: 100/100
