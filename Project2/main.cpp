@@ -35,18 +35,7 @@ std::string criarMensagemInimigos(const std::vector<Char>& inimigos) {
 	return mensagem;
 }
 
-int main() {
-
-	std::string nome = escolherNome();
-	Raca racaJogador = escolherRaca();
-	std::vector<Char> inimigos;
-
-	Char jogador(100, 20, 15, racaJogador);
-		 
-	inimigos.push_back(Char(60, 20, 0, Raca::Humano));
-	inimigos.push_back(Char(80, 25, 5, Raca::Ogro));
-	inimigos.push_back(Char(40, 15, 0, Raca::Esqueleto));
-
+void textoInicial() {
 	escreverLento(std::string(50, '\n'));
 	mudarCor(14);
 	escreverLento("\n\n\n\nA entrada da dungeon fecha-se atras de ti...\n");
@@ -63,10 +52,21 @@ int main() {
 
 	escreverLento("Algo move-se nas sombras.\n");
 	std::this_thread::sleep_for(std::chrono::milliseconds(900));
+}
 
-	mudarCor(12);
-	escreverLento(criarMensagemInimigos(inimigos));
-	std::this_thread::sleep_for(std::chrono::milliseconds(900));
+int main() {
+
+	std::string nome = escolherNome();
+	Raca racaJogador = escolherRaca();
+	std::vector<Char> inimigos;
+
+	Char jogador(100, 20, 15, racaJogador);
+		 
+	inimigos.push_back(Char(60, 20, 0, Raca::Humano));
+	inimigos.push_back(Char(80, 25, 5, Raca::Ogro));
+	inimigos.push_back(Char(40, 15, 0, Raca::Esqueleto));
+
+	textoInicial();
 
 	mudarCor(7);
 	escreverLento("Prepara-te para lutar " + nome + "\n");

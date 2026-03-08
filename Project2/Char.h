@@ -31,8 +31,6 @@ private:
 
 public:
 	Char(int vida, int dano, int defesa, Raca r);
-
-
 	void fimTurno();
 	void defender();
 	void ataque(Char& alvo);
