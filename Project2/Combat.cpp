@@ -19,10 +19,10 @@ bool haInimigosVivos(const std::vector<Char>& inimigos) {
 
 int escolherAlvo(const std::vector<Char>& inimigos) {
     int escolherI;
-
+    mudarCor(7);//Branco
     do {
         escreverLento("Escolhe um inimigo para atacar:\n");
-
+        mudarCor(12);//Vermelho
         for (int i = 0; i < inimigos.size(); i++) {
             if (inimigos[i].getVida() > 0) {
                 escreverLento("[" + std::to_string(i + 1) + "] " +
@@ -33,9 +33,10 @@ int escolherAlvo(const std::vector<Char>& inimigos) {
                     std::to_string(inimigos[i].getVidaMax()) + "\n");
             }
         }
-        escreverLento("\n");
+        mudarCor(11);
+        std::cout << "> ";
         std::cin >> escolherI;
-
+        mudarCor(7);
 
         if (std::cin.fail()) {
             std::cin.clear();
@@ -49,9 +50,9 @@ int escolherAlvo(const std::vector<Char>& inimigos) {
 }
     
 void mostrarEstadoCombate(const Char& jogador, const std::vector<Char>& inimigos, const std::string& nome) {
-    mudarCor(11);
+    mudarCor(11);//azul
     escreverLento("\nJogador: " + nome + " (" + jogador.getNomeRaca() + ") " + "   HP: " + std::to_string(jogador.getVida()) + "/" + std::to_string(jogador.getVidaMax()) + "\n");
-    mudarCor(12);
+    mudarCor(12);//vermelho
     for (int i = 0; i < inimigos.size(); i++) {
         if (inimigos[i].getVida() > 0) {
             escreverLento(inimigos[i].getNomeRaca() + "   HP: " + std::to_string(inimigos[i].getVida()) + "/" + std::to_string(inimigos[i].getVidaMax()) + "\n");
@@ -71,8 +72,12 @@ char turnoJogador(Char& jogador, std::vector<Char>& inimigos, const std::string&
 
             escolherI = escolherAlvo(inimigos);
             jogador.ataque(inimigos[escolherI]);
+            mudarCor(11);//azul
             escreverLento(nome + " tu deste " + std::to_string(jogador.getDano()) + " de Dano\n");
             std::this_thread::sleep_for(std::chrono::milliseconds(800));
+            if (inimigos[escolherI].getVida() <= 0) {
+                escreverLento(inimigos[escolherI].getNomeRaca() + " morreu \n");
+            }
             break;
     }
         case '2': {
@@ -93,7 +98,7 @@ char turnoJogador(Char& jogador, std::vector<Char>& inimigos, const std::string&
 
 void turnoInimigos(Char& jogador, std::vector<Char>& inimigos, char escolhaJogador) {
     if (escolhaJogador == '3') {
-        mudarCor(12);
+        mudarCor(12);//Vermelho
         escreverLento("O inimigo nao pensa o mesmo\n");
     }
 
