@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Raca.h"
+#include "Inventario.h"
 
 class Char {
 
@@ -23,6 +24,10 @@ public:
 	void ataque(Char& alvo);
 	void receberDano(int valor);
 	void aplicarBonusRaca();
+
+	void curar(int valor);
+	
+	int aumentarDano(int valor);
 
 	int getVida() const;
 	int getVidaMax() const;

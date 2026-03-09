@@ -129,14 +129,20 @@
   <ItemGroup>
     <ClCompile Include="Char.cpp" />
     <ClCompile Include="Combat.cpp" />
+    <ClCompile Include="Inventario.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="PocaoVida.cpp" />
     <ClCompile Include="Raca.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Char.h" />
     <ClInclude Include="Combat.h" />
+    <ClInclude Include="Inventario.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="PocaoVida.h" />
     <ClInclude Include="Raca.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

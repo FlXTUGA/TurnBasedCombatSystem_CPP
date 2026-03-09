@@ -48,7 +48,7 @@ Raca escolherRaca() {
 
 	do {
 		mudarCor(7);
-		escreverLento("Escolha uma raca: \n[1] Humano  - equilibrado\n[2] Ogro   +20 vida\n[3] Esqueleto  -20 vida, ataque duplo\n> ");
+		escreverLento("Escolha uma raca: \n[1] Humano  | equilibrado\n[2] Ogro   |+20 vida\n[3] Esqueleto  |-20 vida, ataque duplo\n> ");
 		std::cin >> escolhaRaca;
 		if (escolhaRaca != '1' && escolhaRaca != '2' && escolhaRaca != '3') {
 			mudarCor(7);
@@ -67,7 +67,7 @@ char mostrarMenuEReceberEscolha() {
 
 	do {
 		mudarCor(7);
-		escreverLento("Escolhe UMA opcao\n[1] Atacar \n[2] Defender\n[3] Esperar\n> ");
+		escreverLento("Escolhe UMA opcao\n[1] Atacar \n[2] Defender\n[3] Inventario\n[4] Esperar\n> ");
 		std::cin >> escolha;
 
 		if (escolha != '1' && escolha != '2' && escolha != '3') {

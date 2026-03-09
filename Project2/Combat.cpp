@@ -14,6 +14,32 @@ std::string criarTextoDano(const Char& personagem) {
         return std::to_string(personagem.getDano());
 }
 
+void executarInventario(Char& jogador, Inventario& inventario) {
+    if (inventario.vazio()) {
+        mudarCor(14);
+        escreverLento("O inventario esta vazio.\n");
+        return;
+    }
+    mudarCor(11);
+    escreverLento("Inventario:\n");
+    inventario.mostrar();
+
+    int escolhaItem;
+    std::cout << "> ";
+    std::cin >> escolhaItem;
+
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+        mudarCor(14);
+        escreverLento("Opcao invalida.\n");
+        return;
+    }
+
+    inventario.usarItem(escolhaItem - 1, jogador);
+
+}
+
 void executarAtaqueJogador(Char& jogador, std::vector<Char>& inimigos, const std::string& nome) {
     int escolherI; // escolher inimigo
     mudarCor(11);// cor azul
@@ -109,7 +135,7 @@ void mostrarEstadoCombate(const Char& jogador, const std::vector<Char>& inimigos
     }
 }
 
-char turnoJogador(Char& jogador, std::vector<Char>& inimigos, const std::string& nome) {
+char turnoJogador(Char& jogador, std::vector<Char>& inimigos,Inventario& inventario, const std::string& nome) {
 
     char escolha = mostrarMenuEReceberEscolha();
 
@@ -117,12 +143,17 @@ char turnoJogador(Char& jogador, std::vector<Char>& inimigos, const std::string&
         case '1': {
             executarAtaqueJogador(jogador, inimigos, nome);
             break;
-    }
+        }
         case '2': {
             executarDefesaJogador(jogador, nome);
             break;
-    }
+        }
         case '3': {
+            executarInventario(jogador, inventario);
+            break;
+        }
+
+        case '4': {
             executarEsperaJogador(nome);
             break;
         }
@@ -172,13 +203,13 @@ void turnoInimigos(Char& jogador, std::vector<Char>& inimigos, char escolhaJogad
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
 }
 
-void iniciarCombate(Char& jogador, std::vector<Char>& inimigos, const std::string& nome) {
+void iniciarCombate(Char& jogador, std::vector<Char>& inimigos, Inventario& inventario, const std::string& nome) {
     
     while (jogador.getVida() > 0 && haInimigosVivos(inimigos)) {
    
         mostrarEstadoCombate(jogador, inimigos, nome);
    
-        char escolha = turnoJogador(jogador, inimigos, nome);
+        char escolha = turnoJogador(jogador, inimigos, inventario, nome);
         
         turnoInimigos(jogador, inimigos, escolha);
         

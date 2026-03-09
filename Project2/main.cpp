@@ -7,6 +7,7 @@
 #include "Char.h"
 #include "Combat.h"
 #include "Menu.h"
+#include "PocaoVida.h"
 
 std::string criarMensagemInimigos(const std::vector<Char>& inimigos) {
 	if (inimigos.empty()) {
@@ -61,20 +62,25 @@ int main() {
 	Raca racaJogador = escolherRaca();
 	std::vector<Char> inimigos;
 
-	Char jogador(100, 20, 15, racaJogador);
+	Char jogador(100, 30, 15, racaJogador);
 		 
 	inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto));
 	inimigos.push_back(Char(40, 10, 5, Raca::Esqueleto));
-	inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto));
+	inimigos.push_back(Char(50, 30, 0, Raca::Ogro));
 
-	textoInicial();
+	Inventario inventario;
+
+	inventario.adicionar(std::make_unique<PocaoVida>(20));
+	inventario.adicionar(std::make_unique<PocaoVida>(50));
+
+	//textoInicial();
 	mudarCor(12);//Vermelho
 	escreverLento(criarMensagemInimigos(inimigos));
 
 	mudarCor(7);
 	escreverLento("Prepara-te para lutar " + nome + "\n");
 
-	iniciarCombate(jogador, inimigos, nome);
+	iniciarCombate(jogador, inimigos,inventario, nome);
 
 	return 0;
 }
