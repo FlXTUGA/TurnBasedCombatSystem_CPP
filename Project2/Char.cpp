@@ -1,26 +1,9 @@
 #include "Char.h"
 
-
-
 Char::Char(int vida, int dano, int defesa, Raca r) 
-	: vidaMax(vida), dano(dano), valorDefesa(defesa), estaDefendendo(false), vidaAtual(vidaMax), bonusDano(0), raca(r) 
+	: vidaMax(vida), dano(dano), valorDefesa(defesa), estaDefendendo(false), vidaAtual(vidaMax), modificadorDano(0), raca(r)
 {
 	aplicarBonusRaca();
-}
-
-DadosRaca getDadosRaca(Raca r) {
-	switch (r) {
-	case Raca::Humano:
-		return { 0, false, "Humano", 0 };
-
-	case Raca::Ogro:
-		return { 20, false, "Ogro", 0 };
-
-	case Raca::Esqueleto:
-		return { -20, true, "Esqueleto", -5 };
-	}
-
-	return { 0, false, "Desconhecida", 0 };
 }
 
 void Char::fimTurno() {
@@ -52,12 +35,15 @@ void Char::receberDano(int valor) {
 void Char::aplicarBonusRaca() {
 	DadosRaca dados = getDadosRaca(raca);
 	vidaMax += dados.bonusVida;
+	if (vidaMax < 1) {
+		vidaMax = 1;
+	}
 	vidaAtual = vidaMax;
-	bonusDano -= dados.nerfDano;
+	modificadorDano = dados.modificadorDano;
 }
 
 int Char::getVida() const { return vidaAtual; }
-int Char::getDano() const { return dano - bonusDano ; }
+int Char::getDano() const { return dano + modificadorDano ; }
 int Char::getVidaMax() const { return vidaMax; }
 int Char::getDefesa() const { return valorDefesa; }
 

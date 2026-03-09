@@ -1,12 +1,50 @@
-#include <iostream>
 #include "Combat.h"
-#include "Menu.h"      // escreverLento, mudarCor, mostrarMenuEReceberEscolha
-#include "Char.h"
-#include <vector>
-
-#include <string>
+#include "Menu.h"
+#include <iostream>
 #include <thread>
 #include <chrono>
+
+std::string criarTextoDano(const Char& personagem) {
+        DadosRaca dados = getDadosRaca(personagem.getRaca());
+
+        if (dados.ataqueDuplo) {
+            return std::to_string(personagem.getDano()) + " x2";
+        }
+
+        return std::to_string(personagem.getDano());
+}
+
+void executarAtaqueJogador(Char& jogador, std::vector<Char>& inimigos, const std::string& nome) {
+    int escolherI; // escolher inimigo
+    mudarCor(11);// cor azul
+    escreverLento(nome + " tu escolheste atacar\n");
+
+    escolherI = escolherAlvo(inimigos);
+
+    int vidaAntes = inimigos[escolherI].getVida();
+    jogador.ataque(inimigos[escolherI]);
+    int danoCausado = vidaAntes - inimigos[escolherI].getVida();
+
+    mudarCor(11);
+    escreverLento(nome + " tu deste " + std::to_string(danoCausado) + " de dano\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(800));
+
+    if (inimigos[escolherI].getVida() <= 0) {
+        escreverLento(inimigos[escolherI].getNomeRaca() + " morreu\n");
+    }
+}
+void executarDefesaJogador(Char& jogador, const std::string& nome) {
+
+    jogador.defender();
+    mudarCor(11);
+    escreverLento(nome + " tu estas em modo Defesa!\n");
+
+}
+void executarEsperaJogador(const std::string& nome) {
+    mudarCor(11);
+    escreverLento(nome + " tu escolheste um caminho diferente\n");
+    std::this_thread::sleep_for(std::chrono::milliseconds(800));
+}
 
 bool haInimigosVivos(const std::vector<Char>& inimigos) {
     for (int i = 0; i < inimigos.size(); i++) {
@@ -25,12 +63,15 @@ int escolherAlvo(const std::vector<Char>& inimigos) {
         mudarCor(12);//Vermelho
         for (int i = 0; i < inimigos.size(); i++) {
             if (inimigos[i].getVida() > 0) {
+       
+
                 escreverLento("[" + std::to_string(i + 1) + "] " +
                     inimigos[i].getNomeRaca() +
                     "   HP: " +
                     std::to_string(inimigos[i].getVida()) +
                     "/" +
-                    std::to_string(inimigos[i].getVidaMax()) + "\n");
+                    std::to_string(inimigos[i].getVidaMax()) +
+                    "   Dano: " + criarTextoDano(inimigos[i]) + "\n");
             }
         }
         mudarCor(11);
@@ -51,11 +92,19 @@ int escolherAlvo(const std::vector<Char>& inimigos) {
     
 void mostrarEstadoCombate(const Char& jogador, const std::vector<Char>& inimigos, const std::string& nome) {
     mudarCor(11);//azul
-    escreverLento("\nJogador: " + nome + " (" + jogador.getNomeRaca() + ") " + "   HP: " + std::to_string(jogador.getVida()) + "/" + std::to_string(jogador.getVidaMax()) + "\n");
+    escreverLento("\nJogador: " + nome + 
+        " (" + jogador.getNomeRaca() + ") " + 
+        "   HP: " + std::to_string(jogador.getVida()) +
+        "/" + std::to_string(jogador.getVidaMax()) +
+        "   Dano: "+ criarTextoDano(jogador) + "\n");
     mudarCor(12);//vermelho
     for (int i = 0; i < inimigos.size(); i++) {
         if (inimigos[i].getVida() > 0) {
-            escreverLento(inimigos[i].getNomeRaca() + "   HP: " + std::to_string(inimigos[i].getVida()) + "/" + std::to_string(inimigos[i].getVidaMax()) + "\n");
+         
+            escreverLento(inimigos[i].getNomeRaca() +
+                "   HP: " + std::to_string(inimigos[i].getVida()) + 
+                "/" + std::to_string(inimigos[i].getVidaMax()) +
+                "   Dano: " + criarTextoDano(inimigos[i]) + "\n");
         }
     }
 }
@@ -66,78 +115,60 @@ char turnoJogador(Char& jogador, std::vector<Char>& inimigos, const std::string&
 
     switch (escolha) {
         case '1': {
-            int escolherI; // escolher inimigo
-            mudarCor(11);// cor azul
-            escreverLento(nome + " tu escolheste atacar\n");
-
-            escolherI = escolherAlvo(inimigos);
-            jogador.ataque(inimigos[escolherI]);
-            mudarCor(11);//azul
-            escreverLento(nome + " tu deste " + std::to_string(jogador.getDano()) + " de Dano\n");
-            std::this_thread::sleep_for(std::chrono::milliseconds(800));
-            if (inimigos[escolherI].getVida() <= 0) {
-                escreverLento(inimigos[escolherI].getNomeRaca() + " morreu \n");
-            }
+            executarAtaqueJogador(jogador, inimigos, nome);
             break;
     }
         case '2': {
-            jogador.defender();
-            mudarCor(11);
-            escreverLento(nome + " tu estas em modo Defesa!\n");
+            executarDefesaJogador(jogador, nome);
             break;
     }
         case '3': {
-            mudarCor(11);
-            escreverLento(nome + " tu escolheste um caminho diferente\n");
-            std::this_thread::sleep_for(std::chrono::milliseconds(800));
+            executarEsperaJogador(nome);
             break;
         }
+        default:
+            mudarCor(14);
+            escreverLento("Opcao invalida.\n");
+            break;
     }
     return escolha;
 }
 
 void turnoInimigos(Char& jogador, std::vector<Char>& inimigos, char escolhaJogador) {
     if (escolhaJogador == '3') {
-        mudarCor(12);//Vermelho
+        mudarCor(12);
         escreverLento("O inimigo nao pensa o mesmo\n");
     }
 
     for (int i = 0; i < inimigos.size(); i++) {
         if (inimigos[i].getVida() > 0) {
-            int danoInimigo = inimigos[i].getDano();
-            int danoFinalInimigo = danoInimigo - jogador.getDefesa();
-            if (danoFinalInimigo < 0) {
-                danoFinalInimigo = 0;
+            DadosRaca dados = getDadosRaca(inimigos[i].getRaca());
+
+            int danoBruto = inimigos[i].getDano();
+            if (dados.ataqueDuplo) {
+                danoBruto *= 2;
             }
+
+            int vidaAntes = jogador.getVida();
+            inimigos[i].ataque(jogador);
+            int danoRecebido = vidaAntes - jogador.getVida();
+
+            mudarCor(12);
+            escreverLento(inimigos[i].getNomeRaca() + " atacou!\n");
+            escreverLento("O inimigo deu " + std::to_string(danoRecebido) + " de dano\n");
+
             if (escolhaJogador == '2') {
-
-                int reduzido = danoInimigo - danoFinalInimigo;
-
-                if (danoFinalInimigo < 0) { danoFinalInimigo = 0; }
-                mudarCor(12);
-
-                inimigos[i].ataque(jogador);
-                escreverLento(inimigos[i].getNomeRaca() + " atacou!\n");
-                escreverLento("O inimigo deu " + std::to_string(danoFinalInimigo) + " de Dano\n");
+                int reduzido = danoBruto - danoRecebido;
+                if (reduzido < 0) {
+                    reduzido = 0;
+                }
 
                 mudarCor(11);
                 escreverLento("(Defesa) reduziu " + std::to_string(reduzido) + "\n");
-
-            }
-            else {
-
-                inimigos[i].ataque(jogador);
-                mudarCor(12);
-
-                if (inimigos[i].getRaca() == Raca::Esqueleto) {
-                    escreverLento("O " + inimigos[i].getNomeRaca() + " deu " + std::to_string(2 * inimigos[i].getDano()) + " de dano\n");
-                }
-                else {
-                    escreverLento("O " + inimigos[i].getNomeRaca() + " deu " + std::to_string(inimigos[i].getDano()) + " de dano\n");
-                }
             }
         }
     }
+
     std::this_thread::sleep_for(std::chrono::milliseconds(800));
 }
 

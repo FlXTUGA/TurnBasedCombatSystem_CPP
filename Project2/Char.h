@@ -1,19 +1,6 @@
 #pragma once
 #include <string>
-enum class Raca {
-	Humano,
-	Ogro,
-	Esqueleto
-};
-
-struct DadosRaca {
-	int bonusVida;
-	bool ataqueDuplo;
-	std::string nome;
-	int nerfDano;
-};
-
-DadosRaca getDadosRaca(Raca r);
+#include "Raca.h"
 
 class Char {
 
@@ -27,7 +14,7 @@ private:
 	bool estaDefendendo;
 	int valorDefesa;
 
-	int bonusDano;
+	int modificadorDano;
 
 public:
 	Char(int vida, int dano, int defesa, Raca r);
