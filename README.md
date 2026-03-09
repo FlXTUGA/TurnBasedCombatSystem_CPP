@@ -84,13 +84,13 @@ This project focuses on practicing:
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Future Improvements**
 - Planned features:
-- Multiple enemies
-- Status effects
-- Skills and abilities
-- Inventory system
-- Random encounters
-- Critical hits
-- Experience and leveling
+- [x] Multiple enemies
+- [ ] Status effects
+- [ ] Skills and abilities
+- [x] Inventory system
+- [ ] Random encounters
+- [ ] Critical hits
+- [ ] Experience and leveling
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Author**
 TIGAS
