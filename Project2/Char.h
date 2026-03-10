@@ -25,7 +25,7 @@ public:
 	void receberDano(int valor);
 	void aplicarBonusRaca();
 
-	void curar(int valor);
+	int curar(int valor);
 	
 	int aumentarDano(int valor);
 

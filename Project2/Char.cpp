@@ -42,9 +42,11 @@ void Char::aplicarBonusRaca() {
 	modificadorDano = dados.modificadorDano;
 }
 
-void Char::curar(int valor) {
+int Char::curar(int valor) {
+	int vidaAntes = vidaAtual;
 	vidaAtual += valor;
 	if (vidaAtual > vidaMax) { vidaAtual = vidaMax; }
+	return vidaAtual - vidaAntes;
 
 }
 

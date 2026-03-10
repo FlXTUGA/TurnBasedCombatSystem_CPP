@@ -1,12 +1,14 @@
 #pragma once
 #include "Item.h"
+#include <string>
 
 class PocaoVida:public Item {
 private:
 	int cura;
 public:
-	PocaoVida(int cura);
+	PocaoVida(int valorCura);
 
-	void usar(Char& jogador) override;
+	int usar(Char& jogador) override;
 	bool consomeAoUsar() const override;
+	std::string getDescricao() const override;
 };

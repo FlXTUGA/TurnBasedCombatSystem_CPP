@@ -17,9 +17,11 @@ protected:
 public:
     Item(std::string nome, TipoItem tipo);
 
-    virtual void usar(Char& jogador) = 0;
+    virtual int usar(Char& jogador) = 0;
 
     virtual bool consomeAoUsar() const = 0;
+
+    virtual std::string getDescricao() const = 0;
 
     std::string getNome() const;
     TipoItem getTipo() const;

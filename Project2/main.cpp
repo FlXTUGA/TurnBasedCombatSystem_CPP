@@ -70,7 +70,7 @@ int main() {
 
 	Inventario inventario;
 
-	inventario.adicionar(std::make_unique<PocaoVida>(20));
+	inventario.adicionar(std::make_unique<PocaoVida>(40));
 	inventario.adicionar(std::make_unique<PocaoVida>(50));
 
 	//textoInicial();

@@ -166,7 +166,7 @@ char turnoJogador(Char& jogador, std::vector<Char>& inimigos,Inventario& inventa
 }
 
 void turnoInimigos(Char& jogador, std::vector<Char>& inimigos, char escolhaJogador) {
-    if (escolhaJogador == '3') {
+    if (escolhaJogador == '4') {
         mudarCor(12);
         escreverLento("O inimigo nao pensa o mesmo\n");
     }

@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include "Item.h"
+#include "PocaoVida.h"
 
 class Char;
 

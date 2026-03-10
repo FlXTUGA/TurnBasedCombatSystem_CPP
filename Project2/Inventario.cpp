@@ -15,18 +15,25 @@ bool Inventario::vazio() const {
 
 void Inventario::mostrar() const {
     for (int i = 0; i < itens.size(); i++) {
-        escreverLento(std::to_string(i + 1) + " - " + itens[i]->getNome() + "\n");
+     
+      escreverLento(std::to_string(i + 1) + " - " + itens[i]->getNome()+ " - " + itens[i]->getDescricao() + "\n");
+      
     }
 }
 
 void Inventario::usarItem(int indice, Char& jogador) {
 
+    
+
     if (indice < 0 || indice >= itens.size()) {
         return;
     }
-    escreverLento("Usaste " + itens[indice]->getNome() + "\n");
+
+    int valorCurado = itens[indice]->usar(jogador);
+
+    escreverLento("Usaste " + itens[indice]->getNome() +" (+ "+ std::to_string(valorCurado) + " HP)"  + "\n");
     std::this_thread::sleep_for(std::chrono::milliseconds(900));
-    itens[indice]->usar(jogador);
+    
 
     if (itens[indice]->consomeAoUsar()) {
         itens.erase(itens.begin() + indice);
