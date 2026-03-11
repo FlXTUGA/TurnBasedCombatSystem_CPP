@@ -20,24 +20,39 @@ void executarInventario(Char& jogador, Inventario& inventario) {
         escreverLento("O inventario esta vazio.\n");
         return;
     }
-    mudarCor(11);
-    escreverLento("Inventario:\n");
-    inventario.mostrar();
+    
+	while (true) {  
+        int escolhaItem;
+        mudarCor(11);
+        escreverLento("Inventario:\n");
+        inventario.mostrar();
 
-    int escolhaItem;
-    std::cout << "> ";
-    std::cin >> escolhaItem;
+        
+        std::cout << "> ";
+        std::cin >> escolhaItem;
 
-    if (std::cin.fail()) {
-        std::cin.clear();
-        std::cin.ignore(1000, '\n');
-        mudarCor(14);
-        escreverLento("Opcao invalida.\n");
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            mudarCor(14);
+            escreverLento("Opcao invalida.\n");
+          
+        }
+
+        if (escolhaItem == 0) {
+            return;
+        }
+
+	    int indice = escolhaItem - 1;
+
+        if (indice < 0 || indice >= inventario.getQuantidadeItens()) {
+            mudarCor(14);
+            escreverLento("Item invalido. Tenta outra vez.\n");
+            continue;
+        }  
+        inventario.usarItem(escolhaItem - 1, jogador);
         return;
     }
-
-    inventario.usarItem(escolhaItem - 1, jogador);
-
 }
 
 void executarAtaqueJogador(Char& jogador, std::vector<Char>& inimigos, const std::string& nome) {
@@ -136,31 +151,34 @@ void mostrarEstadoCombate(const Char& jogador, const std::vector<Char>& inimigos
 }
 
 char turnoJogador(Char& jogador, std::vector<Char>& inimigos,Inventario& inventario, const std::string& nome) {
+    char escolha;
+    while (true) {
 
-    char escolha = mostrarMenuEReceberEscolha();
-
-    switch (escolha) {
+        escolha = mostrarMenuEReceberEscolha();
+        
+        switch (escolha) {
         case '1': {
             executarAtaqueJogador(jogador, inimigos, nome);
-            break;
+            return escolha;
         }
         case '2': {
             executarDefesaJogador(jogador, nome);
-            break;
+            return escolha;
         }
         case '3': {
             executarInventario(jogador, inventario);
-            break;
+            continue;
         }
 
         case '4': {
             executarEsperaJogador(nome);
-            break;
+            return escolha;
         }
         default:
             mudarCor(14);
             escreverLento("Opcao invalida.\n");
-            break;
+            continue;
+        }
     }
     return escolha;
 }

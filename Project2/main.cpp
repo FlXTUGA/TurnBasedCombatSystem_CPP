@@ -9,6 +9,7 @@
 #include "Menu.h"
 #include "PocaoVida.h"
 
+
 enum class Salas {
 	Combate,
 	Loja,
@@ -79,9 +80,9 @@ int main() {
 	inventario.adicionar(std::make_unique<PocaoVida>(50));
 
 	std::string nome = escolherNome();
-	Raca racaJogador = escolherRaca();
+	Classe classeJogador = escolherClasse();
 
-	Char jogador(100, 30, 15, racaJogador);
+	Char jogador(100, 30, 15, Raca::Humano, classeJogador );
 
 	//textoInicial();
 	int numeroSalas = 1;
@@ -93,11 +94,11 @@ int main() {
 			std::vector<Char> inimigos;
 
 			if (numeroSalas == 1) {
-				inimigos.push_back(Char(30, 10, 0, Raca::Esqueleto));
+				inimigos.push_back(Char(30, 10, 0, Raca::Esqueleto, Inimigos));
 			}
 			else if (numeroSalas == 2) {
-				inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto));
-				inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto));
+				inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto, Inimigos));
+				inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto, Inimigos));
 			}
 
 			if(numeroSalas == 1){
@@ -154,7 +155,7 @@ int main() {
 		}
 		else if (sala == Salas::Boss) {
 			std::vector<Char> inimigos;
-			inimigos.push_back(Char(150, 40, 10, Raca::Ogro));
+			inimigos.push_back(Char(150, 40, 10, Raca::Ogro, Inimigos));
 			mudarCor(12);//Vermelho
 			escreverLento("O Boss da dungeon aparece no teu caminho!\n");
 			iniciarCombate(jogador, inimigos, inventario, nome);

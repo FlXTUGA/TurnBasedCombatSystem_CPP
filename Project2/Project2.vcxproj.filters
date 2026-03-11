@@ -39,6 +39,9 @@
     <ClCompile Include="PocaoVida.cpp">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClCompile>
+    <ClCompile Include="Classe.cpp">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Combat.h">
@@ -60,6 +63,9 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="PocaoVida.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Classe.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

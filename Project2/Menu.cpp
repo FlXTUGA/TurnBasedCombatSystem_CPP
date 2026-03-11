@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "Char.h"
+#include"Classe.h"
 
 #include <iostream>
 #include <thread>
@@ -42,24 +43,24 @@ std::string escolherNome() {
 	return nome;
 }
 
-Raca escolherRaca() {
+Classe escolherClasse() {
 
-	char escolhaRaca;
+	char escolhaClasse;
 
 	do {
 		mudarCor(7);
-		escreverLento("Escolha uma raca: \n[1] Humano  | equilibrado\n[2] Ogro   |+20 vida\n[3] Esqueleto  |-20 vida, ataque duplo\n> ");
-		std::cin >> escolhaRaca;
-		if (escolhaRaca != '1' && escolhaRaca != '2' && escolhaRaca != '3') {
+		escreverLento("Escolha uma Classe: \n[1] Guerreiro  | +30 Hp | +5 Hit |\n[2] Arqueiro   | +10 Hp | +3 Hit |\n[3] Mago       | +0 Hp  | +10 Hit |\n> ");
+		std::cin >> escolhaClasse;
+		if (escolhaClasse != '1' && escolhaClasse != '2' && escolhaClasse != '3') {
 			mudarCor(7);
 			escreverLento("Opcao invalida. Tenta novamente.\n\n");
 		}
-	} while (escolhaRaca != '1' && escolhaRaca != '2' && escolhaRaca != '3');
+	} while (escolhaClasse != '1' && escolhaClasse != '2' && escolhaClasse != '3');
 
-	if (escolhaRaca == '1') return Raca::Humano;
-	if (escolhaRaca == '2') return Raca::Ogro;
+	if (escolhaClasse== '1') return Classe::Guerreiro;
+	if (escolhaClasse == '2') return Classe::Arqueiro;
 
-	return Raca::Esqueleto;
+	return Classe::Mago;
 }
 
 char mostrarMenuEReceberEscolha() {

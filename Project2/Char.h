@@ -2,40 +2,44 @@
 #include <string>
 #include "Raca.h"
 #include "Inventario.h"
+#include "Classe.h"
 
 class Char {
 
 private:
 	Raca raca;
+	Classe classe;
 
 	int  vidaMax;
 	int  vidaAtual;
 
-	int  const dano;
+	int  dano;
 	bool estaDefendendo;
 	int valorDefesa;
 
-	int modificadorDano;
+	int modificadorDanoRaca;
+	int modificadorDanoClasse;
 
 public:
-	Char(int vida, int dano, int defesa, Raca r);
+	Char(int vida, int dano, int defesa, Raca r, Classe c);
 	void fimTurno();
 	void defender();
 	void ataque(Char& alvo);
 	void receberDano(int valor);
-	void aplicarBonusRaca();
+	
+	void aplicarBonusIniciais();
 
 	int curar(int valor);
 	
-	int aumentarDano(int valor);
 
 	int getVida() const;
 	int getVidaMax() const;
-
 	int getDano() const;
-
 	int getDefesa() const;
 	
+	std::string getNomeClasse() const;
+	Classe getClasse() const;
+
 	std::string getNomeRaca() const;
 	Raca getRaca() const;
 };

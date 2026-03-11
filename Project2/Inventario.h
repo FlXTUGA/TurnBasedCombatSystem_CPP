@@ -19,4 +19,7 @@ public:
 	void usarItem(int indice, Char& jogador);
 
 	bool vazio()const;
+
+	int getQuantidadeItens() const;
+
 };

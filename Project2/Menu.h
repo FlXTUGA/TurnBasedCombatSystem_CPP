@@ -13,6 +13,6 @@ void escreverLento(const std::string& texto, int delayMs = 45);
 
 std::string escolherNome();
 
-Raca escolherRaca();
+Classe escolherClasse();
 
 void linha(int tamanho, char simbolo = '=');
