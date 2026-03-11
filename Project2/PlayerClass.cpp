@@ -1,4 +1,4 @@
-#include"Classe.h"
+#include"PlayerClass.h"
 
 DadosClasse getDadosClasse(Classe c) {
 	switch (c) {

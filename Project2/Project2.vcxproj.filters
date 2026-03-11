@@ -18,39 +18,39 @@
     <ClCompile Include="main.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Char.cpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClCompile>
-    <ClCompile Include="Combat.cpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClCompile>
     <ClCompile Include="Raca.cpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventario.cpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="PocaoVida.cpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Classe.cpp">
-      <Filter>Arquivos de Cabeçalho</Filter>
+    <ClCompile Include="UI.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventario.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Combat.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerClass.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Combat.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Char.h">
+    <ClInclude Include="Character.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
+    <ClInclude Include="UI.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Raca.h">
@@ -65,7 +65,7 @@
     <ClInclude Include="PocaoVida.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Classe.h">
+    <ClInclude Include="PlayerClass.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>

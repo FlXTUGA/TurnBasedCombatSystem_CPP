@@ -1,4 +1,4 @@
-#include "Char.h"
+#include "Character.h"
 
 Char::Char(int vida, int dano, int defesa, Raca r, Classe c) 
 	: vidaMax(vida), dano(dano), valorDefesa(defesa), estaDefendendo(false), vidaAtual(vidaMax), modificadorDanoRaca(0), modificadorDanoClasse(0), raca(r), classe(c)

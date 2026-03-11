@@ -1,7 +1,8 @@
 #include "Inventario.h"
+#include "Character.h"
+#include"UI.h"
+
 #include <iostream>
-#include "Char.h"
-#include"Menu.h"
 #include <chrono>
 #include <thread>
 

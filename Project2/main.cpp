@@ -1,14 +1,13 @@
+#include "Character.h"
+#include "Combat.h"
+#include "UI.h"
+#include "PocaoVida.h"
+
 #include <iostream>
 #include <string>
 #include <thread>
 #include <chrono>
 #include <vector>
-
-#include "Char.h"
-#include "Combat.h"
-#include "Menu.h"
-#include "PocaoVida.h"
-
 
 enum class Salas {
 	Combate,
@@ -24,56 +23,12 @@ std::vector<Salas> salas = {
 
 };
 
-std::string criarMensagemInimigos(const std::vector<Char>& inimigos) {
-	if (inimigos.empty()) {
-		return "Nao ha inimigos no caminho.\n";
-	}
-
-	if (inimigos.size() == 1) {
-		return "Um " + inimigos[0].getNomeRaca() + " aparece no teu caminho.\n";
-	}
-
-	std::string mensagem;
-
-	for (size_t i = 0; i < inimigos.size(); i++) {
-		if (i == 0) {
-			mensagem += "Um " + inimigos[i].getNomeRaca();
-		}
-		else if (i == inimigos.size() - 1) {
-			mensagem += " e um " + inimigos[i].getNomeRaca();
-		}
-		else {
-			mensagem += ", um " + inimigos[i].getNomeRaca();
-		}
-	}
-
-	mensagem += " aparecem no teu caminho.\n";
-	return mensagem;
-}
-
-void textoInicial() {
-	escreverLento(std::string(50, '\n'));
-	mudarCor(14);
-	escreverLento("\n\n\n\nA entrada da dungeon fecha-se atras de ti...\n");
-	std::this_thread::sleep_for(std::chrono::milliseconds(900));
-
-	escreverLento("O ar e frio... e o silencio pesa nos corredores de pedra.\n");
-	std::this_thread::sleep_for(std::chrono::milliseconds(900));
-
-	escreverLento("Das alguns passos na escuridao.\n");
-	std::this_thread::sleep_for(std::chrono::milliseconds(900));
-
-	escreverLento("De repente...\n");
-	std::this_thread::sleep_for(std::chrono::milliseconds(1200));
-
-	escreverLento("Algo move-se nas sombras.\n");
-	std::this_thread::sleep_for(std::chrono::milliseconds(900));
-
-}
 
 int main() {
 	int ouro = 0;
+	std::vector<Char> inimigos;
 
+	std::string mensagem = criarMensagemInimigos(inimigos);
 	Inventario inventario;
 
 	inventario.adicionar(std::make_unique<PocaoVida>(40));
@@ -91,10 +46,9 @@ int main() {
 		escreverLento("\nSala " + std::to_string(numeroSalas) + "\n");
 		if (sala == Salas::Combate) {
 
-			std::vector<Char> inimigos;
-
 			if (numeroSalas == 1) {
 				inimigos.push_back(Char(30, 10, 0, Raca::Esqueleto, Inimigos));
+
 			}
 			else if (numeroSalas == 2) {
 				inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto, Inimigos));

@@ -1,8 +1,9 @@
 #pragma once
-#include <vector>
-#include <memory>
 #include "Item.h"
 #include "PocaoVida.h"
+
+#include <vector>
+#include <memory>
 
 class Char;
 

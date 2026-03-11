@@ -1,8 +1,10 @@
 #pragma once
-#include <string>
 #include "Raca.h"
 #include "Inventario.h"
-#include "Classe.h"
+#include "PlayerClass.h"
+
+#include <string>
+
 
 class Char {
 

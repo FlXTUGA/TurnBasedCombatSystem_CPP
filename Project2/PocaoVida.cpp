@@ -1,6 +1,8 @@
 #include"PocaoVida.h"
-#include "Char.h"
+#include "Character.h"
+
 #include <string>
+
 PocaoVida::PocaoVida(int cura)
     : Item("Pocao de Vida", TipoItem::Consumivel), cura(cura) {
 }

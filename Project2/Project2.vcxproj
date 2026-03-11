@@ -127,23 +127,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Char.cpp" />
-    <ClCompile Include="Classe.cpp" />
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="PlayerClass.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Inventario.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="PocaoVida.cpp" />
     <ClCompile Include="Raca.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Char.h" />
-    <ClInclude Include="Classe.h" />
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="PlayerClass.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Inventario.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="Menu.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="PocaoVida.h" />
     <ClInclude Include="Raca.h" />
   </ItemGroup>

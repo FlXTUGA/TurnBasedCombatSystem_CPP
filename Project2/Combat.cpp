@@ -1,164 +1,23 @@
 #include "Combat.h"
-#include "Menu.h"
+#include "UI.h"
+
 #include <iostream>
 #include <thread>
 #include <chrono>
 
-std::string criarTextoDano(const Char& personagem) {
-        DadosRaca dados = getDadosRaca(personagem.getRaca());
-
-        if (dados.ataqueDuplo) {
-            return std::to_string(personagem.getDano()) + " x2";
-        }
-
-        return std::to_string(personagem.getDano());
-}
-
-void executarInventario(Char& jogador, Inventario& inventario) {
-    if (inventario.vazio()) {
-        mudarCor(14);
-        escreverLento("O inventario esta vazio.\n");
-        return;
-    }
-    
-	while (true) {  
-        int escolhaItem;
-        mudarCor(11);
-        escreverLento("Inventario:\n");
-        inventario.mostrar();
-
-        
-        std::cout << "> ";
-        std::cin >> escolhaItem;
-
-        if (std::cin.fail()) {
-            std::cin.clear();
-            std::cin.ignore(1000, '\n');
-            mudarCor(14);
-            escreverLento("Opcao invalida.\n");
-          
-        }
-
-        if (escolhaItem == 0) {
-            return;
-        }
-
-	    int indice = escolhaItem - 1;
-
-        if (indice < 0 || indice >= inventario.getQuantidadeItens()) {
-            mudarCor(14);
-            escreverLento("Item invalido. Tenta outra vez.\n");
-            continue;
-        }  
-        inventario.usarItem(escolhaItem - 1, jogador);
-        return;
-    }
-}
-
-void executarAtaqueJogador(Char& jogador, std::vector<Char>& inimigos, const std::string& nome) {
-    int escolherI; // escolher inimigo
-    mudarCor(11);// cor azul
-    escreverLento(nome + " tu escolheste atacar\n");
-
-    escolherI = escolherAlvo(inimigos);
-
-    int vidaAntes = inimigos[escolherI].getVida();
-    jogador.ataque(inimigos[escolherI]);
-    int danoCausado = vidaAntes - inimigos[escolherI].getVida();
-
-    mudarCor(11);
-    escreverLento(nome + " tu deste " + std::to_string(danoCausado) + " de dano\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(800));
-
-    if (inimigos[escolherI].getVida() <= 0) {
-        escreverLento(inimigos[escolherI].getNomeRaca() + " morreu\n");
-    }
-}
-void executarDefesaJogador(Char& jogador, const std::string& nome) {
-
-    jogador.defender();
-    mudarCor(11);
-    escreverLento(nome + " tu estas em modo Defesa!\n");
-
-}
-void executarEsperaJogador(const std::string& nome) {
-    mudarCor(11);
-    escreverLento(nome + " tu escolheste um caminho diferente\n");
-    std::this_thread::sleep_for(std::chrono::milliseconds(800));
-}
-
-bool haInimigosVivos(const std::vector<Char>& inimigos) {
-    for (int i = 0; i < inimigos.size(); i++) {
-        if (inimigos[i].getVida() > 0) {
-            return true;
-        }
-    }
-    return false;
-}
-
-int escolherAlvo(const std::vector<Char>& inimigos) {
-    int escolherI;
-    mudarCor(7);//Branco
-    do {
-        escreverLento("Escolhe um inimigo para atacar:\n");
-        mudarCor(12);//Vermelho
-        for (int i = 0; i < inimigos.size(); i++) {
-            if (inimigos[i].getVida() > 0) {
-       
-
-                escreverLento("[" + std::to_string(i + 1) + "] " +
-                    inimigos[i].getNomeRaca() +
-                    "   HP: " +
-                    std::to_string(inimigos[i].getVida()) +
-                    "/" +
-                    std::to_string(inimigos[i].getVidaMax()) +
-                    "   Dano: " + criarTextoDano(inimigos[i]) + "\n");
-            }
-        }
-        mudarCor(11);
-        std::cout << "> ";
-        std::cin >> escolherI;
-        mudarCor(7);
-
-        if (std::cin.fail()) {
-            std::cin.clear();
-            std::cin.ignore(1000, '\n');
-            escolherI = -1;
-        }
-
-    } while (escolherI < 1 || escolherI > inimigos.size() || inimigos[escolherI - 1].getVida() <= 0);
-
-    return escolherI - 1;
-}
-    
-void mostrarEstadoCombate(const Char& jogador, const std::vector<Char>& inimigos, const std::string& nome) {
-    mudarCor(11);//azul
-    escreverLento("\nJogador: " + nome + 
-        " (" + jogador.getNomeRaca() + ") " + 
-        "   HP: " + std::to_string(jogador.getVida()) +
-        "/" + std::to_string(jogador.getVidaMax()) +
-        "   Dano: "+ criarTextoDano(jogador)  + "\n");
-    mudarCor(12);//vermelho
-    for (int i = 0; i < inimigos.size(); i++) {
-        if (inimigos[i].getVida() > 0) {
-         
-            escreverLento(inimigos[i].getNomeRaca() +
-                "   HP: " + std::to_string(inimigos[i].getVida()) + 
-                "/" + std::to_string(inimigos[i].getVidaMax()) +
-                "   Dano: " + criarTextoDano(inimigos[i]) + "\n");
-        }
-    }
-}
-
-char turnoJogador(Char& jogador, std::vector<Char>& inimigos,Inventario& inventario, const std::string& nome) {
+char turnoJogador(Char& jogador, std::vector<Char>& inimigos, Inventario& inventario, const std::string& nome) {
     char escolha;
     while (true) {
 
         escolha = mostrarMenuEReceberEscolha();
-        
+
         switch (escolha) {
         case '1': {
-            executarAtaqueJogador(jogador, inimigos, nome);
+            int indiceAlvo = escolherAlvo(inimigos);
+
+            ResultadoAtaque resultado = executarAtaqueJogador(jogador, inimigos, indiceAlvo);
+
+            mostrarResultadoAtaque(resultado, inimigos, nome);
             return escolha;
         }
         case '2': {
@@ -183,11 +42,43 @@ char turnoJogador(Char& jogador, std::vector<Char>& inimigos,Inventario& inventa
     return escolha;
 }
 
-void turnoInimigos(Char& jogador, std::vector<Char>& inimigos, char escolhaJogador) {
-    if (escolhaJogador == '4') {
-        mudarCor(12);
-        escreverLento("O inimigo nao pensa o mesmo\n");
+void executarInventario(Char& jogador, Inventario& inventario) {
+
+    int indice = escolherItemInventario(inventario);
+
+    if (indice == -1)
+        return;
+
+    inventario.usarItem(indice, jogador);
+}
+
+ResultadoAtaque executarAtaqueJogador(Char& jogador, std::vector<Char>& inimigos, int indiceAlvo) {
+    int vidaAntes = inimigos[indiceAlvo].getVida();
+    jogador.ataque(inimigos[indiceAlvo]);
+    int danoCausado = vidaAntes - inimigos[indiceAlvo].getVida();
+    bool morreu = inimigos[indiceAlvo].getVida() <= 0;
+
+    return { danoCausado, morreu, indiceAlvo };
+}
+
+void executarDefesaJogador(Char& jogador, const std::string& nome) {
+
+    jogador.defender();
+	textoDefesa(nome);
+
+}
+
+bool haInimigosVivos(const std::vector<Char>& inimigos) {
+    for (int i = 0; i < inimigos.size(); i++) {
+        if (inimigos[i].getVida() > 0) {
+            return true;
+        }
     }
+    return false;
+}
+
+std::vector<ResultadoAtaqueInimigo> turnoInimigos(Char& jogador, std::vector<Char>& inimigos, char escolhaJogador) {
+    std::vector<ResultadoAtaqueInimigo> resultados;
 
     for (int i = 0; i < inimigos.size(); i++) {
         if (inimigos[i].getVida() > 0) {
@@ -202,23 +93,28 @@ void turnoInimigos(Char& jogador, std::vector<Char>& inimigos, char escolhaJogad
             inimigos[i].ataque(jogador);
             int danoRecebido = vidaAntes - jogador.getVida();
 
-            mudarCor(12);
-            escreverLento(inimigos[i].getNomeRaca() + " atacou!\n");
-            escreverLento("O inimigo deu " + std::to_string(danoRecebido) + " de dano\n");
+            int reduzido = 0;
+            bool houveReducao = false;
 
             if (escolhaJogador == '2') {
-                int reduzido = danoBruto - danoRecebido;
+                reduzido = danoBruto - danoRecebido;
                 if (reduzido < 0) {
                     reduzido = 0;
                 }
 
-                mudarCor(11);
-                escreverLento("(Defesa) reduziu " + std::to_string(reduzido) + "\n");
+                houveReducao = true;
             }
+
+            resultados.push_back({
+                inimigos[i].getNomeRaca(),
+                danoRecebido,
+                reduzido,
+                houveReducao
+                });
         }
     }
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(800));
+    return resultados;
 }
 
 void iniciarCombate(Char& jogador, std::vector<Char>& inimigos, Inventario& inventario, const std::string& nome) {
@@ -229,13 +125,15 @@ void iniciarCombate(Char& jogador, std::vector<Char>& inimigos, Inventario& inve
    
         char escolha = turnoJogador(jogador, inimigos, inventario, nome);
         
-        turnoInimigos(jogador, inimigos, escolha);
+        std::vector<ResultadoAtaqueInimigo> resultadosInimigos =
+            turnoInimigos(jogador, inimigos, escolha);
+
+        mostrarResultadoTurnoInimigos(resultadosInimigos, escolha);
         
         jogador.fimTurno();
 
         if (!haInimigosVivos(inimigos)) {
-                mudarCor(14);
-                escreverLento("O inimigo cai.\nO silencio volta... Tu segues para a proxima sala e....\n");
+			mensagemDeInimigosMortos();
         }
         mudarCor(7);
     }
