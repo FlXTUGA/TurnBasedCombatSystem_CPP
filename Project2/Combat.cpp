@@ -122,7 +122,7 @@ void mostrarEstadoCombate(const Char& jogador, const std::vector<Char>& inimigos
         " (" + jogador.getNomeRaca() + ") " + 
         "   HP: " + std::to_string(jogador.getVida()) +
         "/" + std::to_string(jogador.getVidaMax()) +
-        "   Dano: "+ criarTextoDano(jogador) + "\n");
+        "   Dano: "+ criarTextoDano(jogador)  + "\n");
     mudarCor(12);//vermelho
     for (int i = 0; i < inimigos.size(); i++) {
         if (inimigos[i].getVida() > 0) {
@@ -215,13 +215,9 @@ void iniciarCombate(Char& jogador, std::vector<Char>& inimigos, Inventario& inve
         
         jogador.fimTurno();
 
-        if (jogador.getVida() == 0) {
-            mudarCor(14);
-            escreverLento(nome + "... a escuridao da dungeon consumiu-te.\n");
-        }
         if (!haInimigosVivos(inimigos)) {
                 mudarCor(14);
-                escreverLento("O inimigo cai.\nO silencio volta... mas algo ainda se move na escuridao.\n");
+                escreverLento("O inimigo cai.\nO silencio volta... Tu segues para a proxima sala e....\n");
         }
         mudarCor(7);
     }
