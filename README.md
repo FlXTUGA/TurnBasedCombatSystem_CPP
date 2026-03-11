@@ -6,99 +6,102 @@ The goal of this project is to explore how classic RPG combat systems work inter
 
 This project is part of my journey to become a gameplay programmer.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Features**
+# Features
 
+## Combat System
 - Turn-based combat loop
-
+- Multiple enemies
 - Player actions:
   - Attack
   - Defend
+  - Open Inventory
   - Wait
+- Turn resolution system
 
-- Character stats system:
-  - Health
-  - Max Health
-  - Damage
-  - Defense
+## Character System
+- Character health and max health
+- Damage and defense values
+- Race and Class modifiers affecting gameplay
 
-- Defense mechanic that reduces incoming damage
-  - Console UI with:
-  - Typewriter text effect
-  - Colored output
+## Item System
+- Inventory system
+- Base `Item` class
+- Polymorphic item behavior
+- Healing potion (`PocaoVida`) implementation
 
-- Modular code structure using multiple source files
+## UI System
+- Console-based UI module
+- Colored terminal output
+- Typewriter-style text effect
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Project Structure
 
 ```
 Project2/
 │
-├── main.cpp
-│   Entry point of the program
-│
-├── Char.h / Char.cpp
-│   Character class and combat logic
-│
-├── Combat.h / Combat.cpp
-│   Handles the combat loop and turn system
-│
-├── Menu.h / Menu.cpp
-│   Console UI utilities (menu, colors, typewriter text)
+├── Character # Character stats and combat interactions
+├── PlayerClass # Player-specific behaviour
+├── Combat # Combat flow and turn resolution
+├── Inventario # Inventory management system
+├── Item # Base item class
+├── PocaoVida # Healing potion implementation
+├── Raca # Race modifiers and attributes
+├── UI # Console UI and player interaction
+└── main.cpp # Program entry point
 ```
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Gameplay Example**
-Player: TIGAS  HP: 100/100
-Enemy: Rogerio HP: 60/60
 
-Choose an action:
-1) Attack
-2) Defend
-3) Wait
->
+Player: TIGAS
+HP: 100 / 100
+
+Enemies:
+Goblin HP: 30
+
+Skeleton HP: 40
+
+Choose action:
+[1] Attack
+[2] Defend
+[3] Inventory
+[4] Wait
+
 
 Example mechanics:
 - Attack deals damage to the enemy
 - Defend reduces incoming damage
 - Wait skips the turn
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**How To Run**
+# Technologies Used
 
-Requirements:
-- C++ compiler (g++, clang, or MSVC)
-- Windows terminal (color support currently uses Windows API)
-
-Compile example:
-g++ main.cpp Combat.cpp Menu.cpp Char.cpp -o combat
-
-Run:
-./combat
+- **C++**
+- Object-Oriented Programming
+- Polymorphism
+- Modular project architecture
+- Console-based user interface
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Learning Goals**
 This project focuses on practicing:
-- Object-Oriented Programming
-- Class design
-- Encapsulation
-- Turn-based gameplay logic
-- Modular C++ project structure
-- Basic terminal UI
+
+- Object-Oriented Programming in C++
+- Gameplay system architecture
+- Turn-based combat mechanics
+- Polymorphism and item systems
+- Separation of gameplay logic and UI
+- Modular project structure
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Future Improvements**
-- Planned features:
-- [x] Multiple enemies
-- [ ] Status effects
-- [ ] Skills and abilities
-- [x] Inventory system
-- [ ] Random encounters
-- [ ] Critical hits
-- [ ] Experience and leveling
+Planned features include:
+
+- Status effects (poison, stun, burn)
+- Skills and abilities
+- Critical hit system
+- Experience and leveling system
+- Random encounters
+- Improved enemy AI
+- Equipment system
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Author**
 TIGAS
 
 Computer Science student and aspiring Gameplay Programmer.
-
-Currently building a C++ portfolio with small gameplay systems and mechanics.
-
-License
-
-This project is open source and available under the MIT License.
