@@ -13,14 +13,14 @@ void linha(int tamanho, char simbolo ) {
 	}
 	std::cout << "\n";
 }
-
+//escreve estilo undertale
 void escreverLento(const std::string& texto, int delayMs)  {
 	for (char c : texto) {
 		std::cout << c << std::flush;
 		std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
 	}
 }
-
+// seleciono um numero dentro do terminal e mudo a cor do texto
 void mudarCor(int cor) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), cor);
 }
@@ -190,7 +190,7 @@ void mostrarResultadoAtaque(const ResultadoAtaque& resultado,const std::vector<C
 
 	if (resultado.alvoMorreu)
 	{
-		escreverLento(inimigos[resultado.indiceAlvo].getNomeRaca() + " morreu\n");
+		escreverLento(inimigos[resultado.indiceAlvo].getNomeRaca() + " morreu\n" );
 	}
 }
 
@@ -253,13 +253,14 @@ void executarEsperaJogador(const std::string& nome) {
 	std::this_thread::sleep_for(std::chrono::milliseconds(800));
 }
 
-void mostrarEstadoCombate(const Char& jogador, const std::vector<Char>& inimigos, const std::string& nome) {
+void mostrarEstadoCombate(const Char& jogador, const std::vector<Char>& inimigos, const std::string& nome, int ouro) {
 	mudarCor(11);//azul
+	ouro = 0;
 	escreverLento("\nJogador: " + nome +
 		" (" + jogador.getNomeRaca() + ") " +
 		"   HP: " + std::to_string(jogador.getVida()) +
 		"/" + std::to_string(jogador.getVidaMax()) +
-		"   Dano: " + criarTextoDano(jogador) + "\n");
+		"   Dano: " + criarTextoDano(jogador) +"   "  + std::to_string(jogador.getOuro()) + " Gold" + "\n");
 	mudarCor(12);//vermelho
 	for (int i = 0; i < inimigos.size(); i++) {
 		if (inimigos[i].getVida() > 0) {
@@ -296,3 +297,4 @@ void mostrarResultadoTurnoInimigos(const std::vector<ResultadoAtaqueInimigo>& re
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(800));
 }
+

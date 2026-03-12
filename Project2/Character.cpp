@@ -1,7 +1,7 @@
 #include "Character.h"
 
 Char::Char(int vida, int dano, int defesa, Raca r, Classe c) 
-	: vidaMax(vida), dano(dano), valorDefesa(defesa), estaDefendendo(false), vidaAtual(vidaMax), modificadorDanoRaca(0), modificadorDanoClasse(0), raca(r), classe(c)
+	: vidaMax(vida), dano(dano), valorDefesa(defesa), estaDefendendo(false), vidaAtual(vidaMax), modificadorDanoRaca(0), modificadorDanoClasse(0), raca(r), classe(c), ouro(0)
 {
 	aplicarBonusIniciais();
 }
@@ -61,7 +61,16 @@ int Char::getVida() const { return vidaAtual; }
 int Char::getDano() const { return dano + modificadorDanoRaca + modificadorDanoClasse ; }
 int Char::getVidaMax() const { return vidaMax; }
 int Char::getDefesa() const { return valorDefesa; }
-
+int Char::getOuro() const { return ouro; }
+void Char::adicionarOuro(int valor) {
+	ouro += valor;
+}
+void Char::removerOuro(int valor) {
+	ouro -= valor;
+	if (ouro < 0) {
+		ouro = 0;
+	}
+}
 
 std::string Char::getNomeClasse() const { 
 	DadosClasse dados = getDadosClasse(classe);

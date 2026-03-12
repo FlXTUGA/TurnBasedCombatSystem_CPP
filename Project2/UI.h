@@ -36,8 +36,10 @@ void textoDefesa(const std::string& nomeJogador);
 
 void executarEsperaJogador(const std::string& nome);
 
-void mostrarEstadoCombate(const Char& jogador, const std::vector<Char>& inimigos, const std::string& nome);
+void mostrarEstadoCombate(const Char& jogador, const std::vector<Char>& inimigos, const std::string& nome, int ouro);
 
 void mensagemDeInimigosMortos();
 
 void mostrarResultadoTurnoInimigos(const std::vector<ResultadoAtaqueInimigo>& resultados, char escolhaJogador);
+
+char mensagemDeLoja(int ouro);

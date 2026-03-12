@@ -25,7 +25,7 @@ std::vector<Salas> salas = {
 
 
 int main() {
-	int ouro = 0;
+	 
 	std::vector<Char> inimigos;
 
 	std::string mensagem = criarMensagemInimigos(inimigos);
@@ -39,13 +39,19 @@ int main() {
 
 	Char jogador(100, 30, 15, Raca::Humano, classeJogador );
 
+	int ouroGanho = 0;
+	int ouro = 0;
+
+	ouro = jogador.getOuro();
+
 	//textoInicial();
 	int numeroSalas = 1;
+
 
 	for (Salas sala : salas) {
 		escreverLento("\nSala " + std::to_string(numeroSalas) + "\n");
 		if (sala == Salas::Combate) {
-
+			inimigos.clear();
 			if (numeroSalas == 1) {
 				inimigos.push_back(Char(30, 10, 0, Raca::Esqueleto, Inimigos));
 
@@ -54,21 +60,28 @@ int main() {
 				inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto, Inimigos));
 				inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto, Inimigos));
 			}
-
-			if(numeroSalas == 1){
-				ouro += 20;
-			}
-			else if (numeroSalas == 2) {
-				ouro += 40;
-			}
-
+			
 			mudarCor(12);//Vermelho
 			escreverLento(criarMensagemInimigos(inimigos));
 
 			mudarCor(7); // branco
 			escreverLento("Prepara-te para lutar " + nome + "\n");
 
-			iniciarCombate(jogador, inimigos, inventario, nome);
+			iniciarCombate(jogador, inimigos, inventario, nome, ouro);
+			
+			if (!haInimigosVivos(inimigos)) {
+				if (numeroSalas == 1) {
+					ouroGanho = 20;
+				}
+				else if (numeroSalas == 2) {
+					ouroGanho = 40;
+				}
+
+				jogador.adicionarOuro(ouroGanho);
+
+				escreverLento("Ganhaste " + std::to_string(ouroGanho) +" de ouro! Agora tens " + std::to_string(jogador.getOuro()) + " de ouro.\n");
+				std::this_thread::sleep_for(std::chrono::milliseconds(900));
+			}
 
 			if (jogador.getVida() <= 0) {
 				break;
@@ -80,19 +93,19 @@ int main() {
 			mudarCor(2);// Verde
 			escreverLento("Encontraste uma loja secreta no meio da dungeon!\n");
 			escreverLento("O lojista oferece-te um item misterioso em troca de 50 de ouro\n");
-			escreverLento("Queres comprar o item?   Tu tens " + std::to_string(ouro) + " ouro\n");
+			escreverLento("Queres comprar o item?          Tu tens " + std::to_string(jogador.getOuro()) + " ouro\n");
 			escreverLento("1 - Sim\n");
 			escreverLento("2 - Nao\n");
 			escreverLento("> ");
 			std::cin >> escolhaLoja;
 			switch(escolhaLoja){
 				case '1':
-					if (ouro >= 50) {
+					if (jogador.getOuro() >= 50) {
 						escreverLento("Compraste o item misterioso!\n");
 						escreverLento("O lojista entrega-te uma pocao de vida poderosa!\n");
 						escreverLento("O lojista desaparece na escuridao, deixando-te com o item misterioso.\n");
 						escreverLento("- 50 ouro\n");
-						ouro -= 50;
+						jogador.removerOuro(50);
 						inventario.adicionar(std::make_unique<PocaoVida>(70));
 					}
 					else {
@@ -112,7 +125,7 @@ int main() {
 			inimigos.push_back(Char(150, 40, 10, Raca::Ogro, Inimigos));
 			mudarCor(12);//Vermelho
 			escreverLento("O Boss da dungeon aparece no teu caminho!\n");
-			iniciarCombate(jogador, inimigos, inventario, nome);
+			iniciarCombate(jogador, inimigos, inventario, nome, jogador.getOuro());
 
 			if (jogador.getVida() <= 0) {
 				mudarCor(14);

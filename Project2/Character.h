@@ -22,6 +22,8 @@ private:
 	int modificadorDanoRaca;
 	int modificadorDanoClasse;
 
+	int ouro;
+
 public:
 	Char(int vida, int dano, int defesa, Raca r, Classe c);
 	void fimTurno();
@@ -31,6 +33,9 @@ public:
 	
 	void aplicarBonusIniciais();
 
+	void adicionarOuro(int valor);
+	void removerOuro(int valor);
+
 	int curar(int valor);
 	
 
@@ -38,6 +43,7 @@ public:
 	int getVidaMax() const;
 	int getDano() const;
 	int getDefesa() const;
+	int getOuro() const;
 	
 	std::string getNomeClasse() const;
 	Classe getClasse() const;

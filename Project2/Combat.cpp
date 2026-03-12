@@ -5,6 +5,33 @@
 #include <thread>
 #include <chrono>
 
+void executarInventario(Char& jogador, Inventario& inventario) {
+
+    int indice = escolherItemInventario(inventario);
+
+	//ao inserir um numero invalido, a funcao retorna -1, entao so continuamos se for diferente disso
+    if (indice == -1)
+        return;
+
+    inventario.usarItem(indice, jogador);
+}
+// O jogador ataca o inimigo selecionado e retorna o resultado do ataque
+ResultadoAtaque executarAtaqueJogador(Char& jogador, std::vector<Char>& inimigos, int indiceAlvo) {
+    int vidaAntes = inimigos[indiceAlvo].getVida();
+    jogador.ataque(inimigos[indiceAlvo]);
+    int danoCausado = vidaAntes - inimigos[indiceAlvo].getVida();
+    bool morreu = inimigos[indiceAlvo].getVida() <= 0;
+
+    return { danoCausado, morreu, indiceAlvo };
+}
+
+void executarDefesaJogador(Char& jogador, const std::string& nome) {
+
+    jogador.defender();
+	textoDefesa(nome);
+
+}
+
 char turnoJogador(Char& jogador, std::vector<Char>& inimigos, Inventario& inventario, const std::string& nome) {
     char escolha;
     while (true) {
@@ -42,32 +69,7 @@ char turnoJogador(Char& jogador, std::vector<Char>& inimigos, Inventario& invent
     return escolha;
 }
 
-void executarInventario(Char& jogador, Inventario& inventario) {
-
-    int indice = escolherItemInventario(inventario);
-
-    if (indice == -1)
-        return;
-
-    inventario.usarItem(indice, jogador);
-}
-
-ResultadoAtaque executarAtaqueJogador(Char& jogador, std::vector<Char>& inimigos, int indiceAlvo) {
-    int vidaAntes = inimigos[indiceAlvo].getVida();
-    jogador.ataque(inimigos[indiceAlvo]);
-    int danoCausado = vidaAntes - inimigos[indiceAlvo].getVida();
-    bool morreu = inimigos[indiceAlvo].getVida() <= 0;
-
-    return { danoCausado, morreu, indiceAlvo };
-}
-
-void executarDefesaJogador(Char& jogador, const std::string& nome) {
-
-    jogador.defender();
-	textoDefesa(nome);
-
-}
-
+// Verifica se ainda há inimigos vivos
 bool haInimigosVivos(const std::vector<Char>& inimigos) {
     for (int i = 0; i < inimigos.size(); i++) {
         if (inimigos[i].getVida() > 0) {
@@ -76,7 +78,7 @@ bool haInimigosVivos(const std::vector<Char>& inimigos) {
     }
     return false;
 }
-
+// Os inimigos atacam o jogador e retorna um vetor com os resultados de cada ataque
 std::vector<ResultadoAtaqueInimigo> turnoInimigos(Char& jogador, std::vector<Char>& inimigos, char escolhaJogador) {
     std::vector<ResultadoAtaqueInimigo> resultados;
 
@@ -117,11 +119,11 @@ std::vector<ResultadoAtaqueInimigo> turnoInimigos(Char& jogador, std::vector<Cha
     return resultados;
 }
 
-void iniciarCombate(Char& jogador, std::vector<Char>& inimigos, Inventario& inventario, const std::string& nome) {
+void iniciarCombate(Char& jogador, std::vector<Char>& inimigos, Inventario& inventario, const std::string& nome, int ouro) {
     
     while (jogador.getVida() > 0 && haInimigosVivos(inimigos)) {
    
-        mostrarEstadoCombate(jogador, inimigos, nome);
+        mostrarEstadoCombate(jogador, inimigos, nome, ouro);
    
         char escolha = turnoJogador(jogador, inimigos, inventario, nome);
         
