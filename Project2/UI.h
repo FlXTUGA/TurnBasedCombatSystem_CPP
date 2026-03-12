@@ -1,6 +1,7 @@
 #pragma once
 #include "Character.h"
 #include "Combat.h"
+#include "Dificuldade.h"
 
 #include <string>
 #include<vector>
@@ -43,3 +44,5 @@ void mensagemDeInimigosMortos();
 void mostrarResultadoTurnoInimigos(const std::vector<ResultadoAtaqueInimigo>& resultados, char escolhaJogador);
 
 char mensagemDeLoja(int ouro);
+
+Dificuldade escolherDificuldade();

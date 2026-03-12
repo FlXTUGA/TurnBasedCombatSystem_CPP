@@ -2,19 +2,20 @@
 #include "Combat.h"
 #include "UI.h"
 #include "PocaoVida.h"
+#include "Dificuldade.h"
 
 #include <iostream>
 #include <string>
 #include <thread>
 #include <chrono>
 #include <vector>
+#include <limits>
 
 enum class Salas {
 	Combate,
 	Loja,
 	Boss
 };
-
 std::vector<Salas> salas = {
 	Salas::Combate,
 	Salas::Combate,
@@ -26,6 +27,9 @@ std::vector<Salas> salas = {
 
 int main() {
 	 
+	Dificuldade dificuldadeAtual = escolherDificuldade();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 	std::vector<Char> inimigos;
 
 	std::string mensagem = criarMensagemInimigos(inimigos);
@@ -47,18 +51,20 @@ int main() {
 	//textoInicial();
 	int numeroSalas = 1;
 
-
 	for (Salas sala : salas) {
 		escreverLento("\nSala " + std::to_string(numeroSalas) + "\n");
 		if (sala == Salas::Combate) {
 			inimigos.clear();
-			if (numeroSalas == 1) {
-				inimigos.push_back(Char(30, 10, 0, Raca::Esqueleto, Inimigos));
+			int quantidadeInimigos = numeroSalas * getMultiplicador(dificuldadeAtual);
 
-			}
-			else if (numeroSalas == 2) {
-				inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto, Inimigos));
-				inimigos.push_back(Char(40, 10, 0, Raca::Esqueleto, Inimigos));
+			for (int i = 0; i < quantidadeInimigos; i++) {
+				Raca racaRandom = static_cast<Raca>(rand() % 5);
+				DadosRaca dados = getDadosRaca(racaRandom);
+
+				int vida = 40 + dados.bonusVida;
+				int dano = 10 + dados.modificadorDano;
+
+				inimigos.emplace_back(vida, dano, 0, racaRandom, Inimigos);
 			}
 			
 			mudarCor(12);//Vermelho

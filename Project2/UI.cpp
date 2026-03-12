@@ -298,3 +298,25 @@ void mostrarResultadoTurnoInimigos(const std::vector<ResultadoAtaqueInimigo>& re
 	std::this_thread::sleep_for(std::chrono::milliseconds(800));
 }
 
+Dificuldade escolherDificuldade() {
+	int escolhaDif; 
+
+	do {
+		std::cout << "Escolhe a dificuldade:\n";
+		std::cout << "[1] Facil\n";
+		std::cout << "[2] Medio\n";
+		std::cout << "[3] Dificil\n";
+		std::cout << "> ";
+		std::cin >> escolhaDif;
+
+		switch (escolhaDif) {
+		case 1: return Dificuldade::Facil;
+		case 2: return Dificuldade::Medio;
+		case 3: return Dificuldade::Dificil;
+		default:
+			std::cout << "Opcao invalida. Tenta outra vez.\n\n";
+		}
+
+	} while (true);
+
+}

@@ -2,9 +2,11 @@
 #include <string>
 
 enum class Raca {
-	Humano,
+	Esqueleto,
+	Goblin,
 	Ogro,
-	Esqueleto
+	Golem,
+	Humano
 };
 
 struct DadosRaca {
