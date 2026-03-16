@@ -129,11 +129,13 @@
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Dificuldade.cpp" />
+    <ClCompile Include="EnemyGenerator.cpp" />
     <ClCompile Include="PlayerClass.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Inventario.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rooms.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="PocaoVida.cpp" />
     <ClCompile Include="Raca.cpp" />
@@ -141,10 +143,12 @@
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Dificuldade.h" />
+    <ClInclude Include="EnemyGenerator.h" />
     <ClInclude Include="PlayerClass.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Inventario.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Rooms.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="PocaoVida.h" />
     <ClInclude Include="Raca.h" />

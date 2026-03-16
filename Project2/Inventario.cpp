@@ -6,7 +6,7 @@
 #include <chrono>
 #include <thread>
 
-int Inventario::getQuantidadeItens() const {
+size_t Inventario::getQuantidadeItens() const {
     return itens.size();
 }
 

@@ -46,3 +46,5 @@ void mostrarResultadoTurnoInimigos(const std::vector<ResultadoAtaqueInimigo>& re
 char mensagemDeLoja(int ouro);
 
 Dificuldade escolherDificuldade();
+
+void mostrarMensagemInimigos(const std::vector<Char>& inimigos);

@@ -320,3 +320,8 @@ Dificuldade escolherDificuldade() {
 	} while (true);
 
 }
+
+void mostrarMensagemInimigos(const std::vector<Char>& inimigos) {
+	mudarCor(12);//Vermelho
+	escreverLento(criarMensagemInimigos(inimigos));
+}

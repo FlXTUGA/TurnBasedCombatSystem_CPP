@@ -21,6 +21,6 @@ public:
 
 	bool vazio()const;
 
-	int getQuantidadeItens() const;
+	size_t getQuantidadeItens() const;
 
 };

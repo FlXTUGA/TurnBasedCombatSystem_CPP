@@ -13,66 +13,99 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{b647c28f-a92b-4e5b-9eaf-73e9e43b93b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character">
+      <UniqueIdentifier>{9272cd3b-f67d-46b4-ab86-f3e4e2721ff6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Combat">
+      <UniqueIdentifier>{3c433d96-cf4a-48f1-969d-2c29024a9c97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items">
+      <UniqueIdentifier>{f7c72535-fba8-4edb-a280-2cfb7c4da7a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{ba453673-ee6c-4e14-aaa1-6c7784cd6054}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{bc81f2c0-7bd6-4a36-a171-ee7cb2ee41b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemies">
+      <UniqueIdentifier>{07497cd4-49c9-48c9-b680-a9e54139f7fd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Raca.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="PocaoVida.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventario.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Combat.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerClass.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Combat.cpp">
+      <Filter>Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="PocaoVida.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventario.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerClass.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="Raca.cpp">
+      <Filter>Character</Filter>
     </ClCompile>
     <ClCompile Include="Dificuldade.cpp">
-      <Filter>Arquivos de Origem</Filter>
+      <Filter>Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyGenerator.cpp">
+      <Filter>Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="Rooms.cpp">
+      <Filter>World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Combat.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Character.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>Character</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Raca.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventario.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+    <ClInclude Include="Combat.h">
+      <Filter>Combat</Filter>
     </ClInclude>
     <ClInclude Include="PocaoVida.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventario.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Raca.h">
+      <Filter>Character</Filter>
     </ClInclude>
     <ClInclude Include="PlayerClass.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>Character</Filter>
     </ClInclude>
     <ClInclude Include="Dificuldade.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
+      <Filter>Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyGenerator.h">
+      <Filter>Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="Rooms.h">
+      <Filter>World</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

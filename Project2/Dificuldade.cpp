@@ -1,4 +1,8 @@
 #include "Dificuldade.h"
+#include "UI.h"
+
+#include <iostream>
+#include <limits>
 
 int getMultiplicador(Dificuldade d) {
     switch (d) {
@@ -7,4 +11,10 @@ int getMultiplicador(Dificuldade d) {
     case Dificuldade::Dificil: return 3;
     }
     return 1;
+}
+
+Dificuldade obterDificuldade() {
+    Dificuldade dificuldadeAtual = escolherDificuldade();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    return dificuldadeAtual;
 }
